@@ -1,0 +1,24 @@
+<!DOCTYPE html 
+<html lang="en" >
+<head >
+  <meta charset="UTF-8" >
+  <title> Title</title >
+  <script src="http://code.jquery.com/jquery-2.1.1.min.js" ></script >
+</head >
+<body >
+  <h3 >功能1：发送ajax请求</h3 >
+  <p class="content" ></p > //这里的内容是空的
+  <button class="btn" >ajax</button> 
+  <script >
+    $('.btn').click(function(){
+      $.ajax({
+        url:'/rango/ajax',
+        type:'get',
+        success:function(data){
+          $('.content').html(data)
+        }
+      })
+    })
+  </script >
+</body >
+</html >

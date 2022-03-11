@@ -1,9 +1,8 @@
+from __future__ import unicode_literals
 from django.shortcuts import render
-
 from django.http import HttpResponse
 
 from rango.models import Category, Page
-
 from rango.forms import CategoryForm, PageForm
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -11,8 +10,23 @@ from django.urls import reverse
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
 from datetime import datetime
+
+from django.views.decorators.csrf import csrf_exempt
+import json
+from django.http import JsonResponse
+
+def ajax(request):
+    return HttpResponse('hello!world!')
+
+@csrf_exempt
+def ajax_add(request):
+    print(request.POST)
+    a = int(request.POST.get('a'))
+    b = int(request.POST.get('b'))
+    return_json = {'result':a+b,'a':5}
+    return HttpResponse(json.dumps(return_json), content_type='application/json')
+   
 
 def index(request):
 	category_list= Category.objects.order_by('-likes')[:5]
